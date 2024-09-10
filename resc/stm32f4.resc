@@ -1,0 +1,48 @@
+
+mach create "ren"
+
+include @/stm32f4/can_peripheral/custom_can.cs
+
+machine LoadPlatformDescription @/stm32f4/repl/stm32f4.repl            #@platforms/cpus/stm32f4.repl
+
+sysbus LoadELF @/stm32f4/build/Debug/stm32f4.elf
+
+sysbus LogPeripheralAccess sysbus.can1     # Enable logging for all peripherals
+
+#sysbus.cpu LogFunctionNames true        # second true sets: to not log duplicates right           ---> leads to watch beeing slow
+
+#logLevel -1 gpioPortA                  # Log every Noisy, Debug, Info, Warning and Error for peripheral gpioPortA in cmd
+
+logLevel 3
+#logLevel -1 sysbus.can1                             # Log Warnings and Errors
+logLevel -1 sysbus.adc
+
+logFile @/stm32f4/resc/logs.log
+
+sysbus.cpu AddHook `sysbus GetSymbolAddress "Error_Handler"` "print 'You have reached the Error_Handler function'"
+
+#sysbus.cpu AddHook `sysbus GetSymbolAddress "prnt"` "print 'You have reached the prnt function'"
+
+# CAN connection renode to host
+
+# Create internal CAN hub for routing frames
+emulation CreateCANHub "canHub"
+
+# Connect CAN controller to the CAN hub
+connector Connect sysbus.can1 canHub
+
+# Create CAN bridge to host, by default it will be named `vcan0`
+machine CreateSocketCANBridge "socketcan"
+
+# Connect bridge to the internal network
+connector Connect sysbus.socketcan canHub
+
+
+set sleep """                           # Inline python script creating a sleep function
+> def mc_sleep(time)                    # mc_ prefix needed to be a monitor command
+>   sleep(float(time))
+"""
+
+#sysbus.gpioPortA OnGPIO 11 True         # Pull RX to High to simulate others received the message, should not be needed in loopback mode 
+
+

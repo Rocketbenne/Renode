@@ -1,0 +1,7 @@
+{
+    "remote.extensionKind": {
+    "stmicroelectronics.stm32-vscode-extension": [
+      "workspace"
+    ]
+  }
+}
