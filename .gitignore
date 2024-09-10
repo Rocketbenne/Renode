@@ -1,0 +1,121 @@
+# GCC ARM Embedded toolchain specific
+*.d
+*.elf
+*.hex
+*.bin
+*.map
+*.srec
+*.lst
+*.o
+*.axf
+*.crf
+*.dep
+*.dmp
+
+# Backup files
+*~
+*.bak
+*.tmp
+*.temp
+
+# IDE specific
+.idea/
+*.swp
+*.swo
+*.swd
+
+# Eclipse specific
+/.metadata/
+/.buildpath
+/.project
+/.cproject
+/.loadpath
+/.recommenders
+/.externalToolBuilders/
+/.settings/
+/.Debug
+/.Release
+
+# STM32CubeIDE specific
+/.settings/
+/.cproject
+.project
+*.launch
+*.scvd
+*.bin
+*.elf
+*.hex
+*.log
+*.out
+
+# STM32CubeMX generated files and directories
+/*_timers.list
+/*_adc.list
+/*_opamp.list
+/*_crc.list
+/*_dac.list
+/*_exti.list
+/*_timers.map
+/*_gpio.map
+/*_nvic.map
+/*_rcc.map
+
+# Keil specific
+*.axf
+*.bak
+*.cnv
+*.d
+*.dep
+*.htm
+*.i
+*.lnp
+*.lst
+*.map
+*.plg
+*.sct
+*.tmf
+*.tra
+*.uvguix.*
+*.uvoptx
+*.uvprojx.*
+*.uvopt
+*.uvproj
+/UVBuild/
+/Objects/
+/Listings/
+/*.axf
+/*.o
+/*.crf
+/*.d
+/*.elf
+/*.hex
+/*.map
+/*.lst
+/*.out
+/*.sct
+/*.uvopt
+/*.uvproj
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# build directories
+/Debug/
+/Release/
+/build/
+
+# renode log file
+/resc/logs*
+
+# runtime created folder
+/shell_script/renode
+
+# python venv
+/py_tests
+/py_tests/env
+/py_tests/.env
+
+# not used/finished peripherals
+/renode_peripherals/can.cs
+/renode_peripherals/fdcan.cs
