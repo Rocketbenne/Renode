@@ -5,7 +5,13 @@ include @/stm32f4/can_peripheral/custom_can.cs
 
 machine LoadPlatformDescription @/stm32f4/repl/stm32f4.repl            #@platforms/cpus/stm32f4.repl
 
-sysbus LoadELF @/stm32f4/build/Debug/stm32f4.elf
+$bin?=@/stm32f4/build/Debug/stm32f4.elf
+
+macro reset
+"""
+    sysbus LoadELF $bin
+"""
+runMacro $reset
 
 sysbus LogPeripheralAccess sysbus.can1     # Enable logging for all peripherals
 
