@@ -2,7 +2,7 @@
 
 This does the same as https://git.alpitronic.it/benedikt.unterthurner/STM32-Simulator but with a simulated STM32F4 Microcontroller.
 
-#### Working
+#### Working Peripherals
 + GPIO
 + ADC
 + CAN 
