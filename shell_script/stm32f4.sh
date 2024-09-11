@@ -10,4 +10,4 @@ echo "Script directory: $SCRIPT_DIR"
 chmod 755 $SCRIPT_DIR/../shell_script/stm32f4.sh
 
 # Start Docker Image
-docker run -it --rm --network=host -p 3333:3333 --name $NAME -v $SCRIPT_DIR/..:/stm32f4 antmicro/renode bash -c "renode --console -e 'include @/stm32f4/resc/stm32f4.resc'"
+docker run -it --rm --network=host --name $NAME -v $SCRIPT_DIR/..:/stm32f4 antmicro/renode bash -c "renode --console -e 'include @/stm32f4/resc/stm32f4.resc'"
