@@ -125,6 +125,8 @@ int main(void)
 		Error_Handler();
 	}
 
+    TxData[0] = 0xF4;
+
     /* USER CODE END 2 */
 
     /* Infinite loop */
@@ -167,21 +169,18 @@ int main(void)
         // Print value state of GPIO_PIN_1, adc value and a counter value using CAN Messages 
         /* Save state of GPIO Output Pin in TxData and transmit it via FDCAN */
         
-        if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1) == GPIO_PIN_SET)
-            TxData[0] = 1;
-        else
-            TxData[0] = 0;
+        TxData[1] = (GPIOA, GPIO_PIN_1);
 
-        TxData[1] = value_adc;
+        TxData[2] = value_adc;
 
-        TxData[2] = counter++;
+        TxData[3] = counter++;
 
-        if (HAL_CAN_AddTxMessage(&hcan1, &TxHeader, TxData, &TxMailbox) != HAL_OK)
-        {
-            Error_Handler();
-        }
+        //if (HAL_CAN_AddTxMessage(&hcan1, &TxHeader, TxData, &TxMailbox) != HAL_OK)
+        //{
+        //    Error_Handler();
+        //}
 
-        HAL_Delay(3000);
+        HAL_Delay(20000);  //3000
     }
     /* USER CODE END 3 */
 }
@@ -388,7 +387,7 @@ static void CAN_Config(void)
     TxHeader.ExtId = 0x01;
     TxHeader.RTR = CAN_RTR_DATA;
     TxHeader.IDE = CAN_ID_STD;
-    TxHeader.DLC = 8;
+    TxHeader.DLC = 4;
     TxHeader.TransmitGlobalTime = DISABLE;
 }
 
@@ -406,6 +405,8 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
         /* Reception Error */
         Error_Handler();
     }
+
+    RxData[0] = 0xF4;
 
     if (HAL_CAN_AddTxMessage(&hcan1, &TxHeader, RxData, &TxMailbox) != HAL_OK)
     {
