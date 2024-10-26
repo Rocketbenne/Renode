@@ -37,13 +37,13 @@ Using the include-command one can add other Renode scripts or other things like 
 
     include @scripts/single-node/quark_c1000.resc
 
-    include @/stm32g0/renode_peripherals/rcc.cs
+    include @/stm32f4/renode_peripherals/rcc.cs
 
 ### `machine LoadPlatformDescription`
 
 Loads the platform description file (*.repl*). It takes one parameter which is the path to the file. In the renode monitor most times you will need to use `@` as a prefix for paths. 
 
-    machine LoadPlatformDescription @/stm32g0/repl/stm32g0.repl
+    machine LoadPlatformDescription @/stm32f4/repl/stm32f4.repl
 
 ### `sysbus`
 
@@ -53,7 +53,7 @@ This is the machine's root for all peripherals. The peripherals of the Microcont
 
 This command loads the binary which will later be executed in the simulation. 
 
-    sysbus LoadELF @/stm32g0/build/Debug/stm32g0b1.elf
+    sysbus LoadELF @/stm32f4/build/Debug/stm32f4.elf
 
 ### `sysbus.cpu AddHook`
 To quickly check if a function was called by the Microcontroller you can add a hook which detects when the function is entered.
